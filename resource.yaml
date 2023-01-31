@@ -1,0 +1,65 @@
+# Copyright (c) Contrasec 2022
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  labels:
+    app: mongodb
+  name: mongodb
+spec:
+  selector:
+    matchLabels:
+      app: mongodb
+  replicas: 1
+  serviceName: mongodb
+  template:
+    metadata:
+      labels:
+        app: mongodb
+    spec:
+      containers:
+      - name: mongodb
+        image: mongo:3.6
+        imagePullPolicy: IfNotPresent
+        resources:
+          requests:
+            memory: 100Mi
+            cpu: 50m
+          limits:
+            cpu: 1
+        volumeMounts:
+        - mountPath: /data/db
+          name: data
+      restartPolicy: Always
+  volumeClaimTemplates:
+    - apiVersion: v1
+      kind: PersistentVolumeClaim
+      metadata:
+        annotations:
+        name: data
+      spec:
+        accessModes:
+        - ReadWriteOnce
+        resources:
+          requests:
+            storage: 5Gi
+        volumeMode: Filesystem
+      status:
+        phase: Pending
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: mongodb
+  name: mongodb
+spec:
+  ports:
+  - name: "27017"
+    port: 27017
+    targetPort: 27017
+  selector:
+    app: mongodb
+status:
+  loadBalancer: {}
