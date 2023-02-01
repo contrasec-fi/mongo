@@ -1,6 +1,6 @@
 # Components-Mongo
 
-for the ODALA project.
+for the ODALA project. Mongo is used for settings and is needed by [Market place](https://business-api-ecosystem.readthedocs.io/en/latest/). At the time of writing, Market place deployment model is under development and Market place is not available publicly via deployment files.
 
 © 2022 Contrasec Oy
 
