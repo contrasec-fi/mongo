@@ -1,3 +1,5 @@
+**NOTE!** this project is intended to be run from GitLab - hence the -gitlab-ci.yml. See the gitlab-ci file to understand what is needed; for example variables and secrets are picked up from GitLab CI/CD variables.
+
 # Components-Mongo
 
 for the ODALA project. Mongo is used for settings and is needed by [Market place](https://business-api-ecosystem.readthedocs.io/en/latest/). At the time of writing, Market place deployment model is under development and Market place is not available publicly via deployment files.
